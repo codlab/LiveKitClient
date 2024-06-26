@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "LiveKit",
+    name: "LiveKitClient",
     platforms: [
         .iOS(.v13),
         .macOS(.v10_15),
