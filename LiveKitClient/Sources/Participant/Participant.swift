@@ -103,7 +103,8 @@ public class Participant: NSObject, ObservableObject, Loggable {
 
             if newState.isSpeaking != oldState.isSpeaking {
                 self.delegates.notify(label: { "participant.didUpdate isSpeaking: \(self.isSpeaking)" }) {
-                    $0.participant?(self, didUpdateIsSpeaking: self.isSpeaking)
+                self.delegates.notify(label: { "participant.didUpdate isSpeaking: \(newState.isSpeaking)" }) {
+                    $0.participant?(self, didUpdateIsSpeaking: newState.isSpeaking)
                 }
             }
 
@@ -133,11 +134,12 @@ public class Participant: NSObject, ObservableObject, Loggable {
             }
 
             if newState.connectionQuality != oldState.connectionQuality {
-                self.delegates.notify(label: { "participant.didUpdate connectionQuality: \(self.connectionQuality)" }) {
-                    $0.participant?(self, didUpdateConnectionQuality: self.connectionQuality)
+                let quality = newState.connectionQuality
+                self.delegates.notify(label: { "participant.didUpdate connectionQuality: \(quality)" }) {
+                    $0.participant?(self, didUpdateConnectionQuality: quality)
                 }
-                room.delegates.notify(label: { "room.didUpdate connectionQuality: \(self.connectionQuality)" }) {
-                    $0.room?(room, participant: self, didUpdateConnectionQuality: self.connectionQuality)
+                room.delegates.notify(label: { "room.didUpdate connectionQuality: \(quality)" }) {
+                    $0.room?(room, participant: self, didUpdateConnectionQuality: quality)
                 }
             }
 
@@ -197,6 +199,12 @@ public class Participant: NSObject, ObservableObject, Loggable {
         _state.mutate { $0.permissions = newValue }
 
         return true
+    }
+
+    @objc
+    public func wrapDelegate(delegate: ParticipantDelegate) -> ParticipantDelegate
+    {
+        return ParticipantDelegateKotlin(delegate: delegate)
     }
 }
 
