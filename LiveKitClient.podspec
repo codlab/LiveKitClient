@@ -12,14 +12,14 @@ Pod::Spec.new do |spec|
   spec.swift_versions = ["5.7"]
   spec.source = {:git => "https://github.com/livekit/client-sdk-swift.git", :tag => spec.version.to_s}
 
-  spec.source_files = "Sources/**/*"
+  spec.source_files = "LiveKitClient/Sources/**/*"
 
   spec.dependency("LiveKitWebRTC", "= 125.6422.24")
   spec.dependency("SwiftProtobuf")
-  spec.dependency("Logging", "= 1.5.4")
-  spec.dependency("DequeModule", "= 1.1.4")
+  spec.dependency("Logging")
+  spec.dependency("DequeModule")
 
-  spec.resource_bundles = {"Privacy" => ["Sources/LiveKit/PrivacyInfo.xcprivacy"]}
+  spec.resource_bundles = {"Privacy" => ["LiveKitClient/Sources/LiveKit/PrivacyInfo.xcprivacy"]}
 
   xcode_output = `xcodebuild -version`.strip
   major_version = xcode_output =~ /Xcode\s+(\d+)/ ? $1.to_i : 15
