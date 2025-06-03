@@ -33,7 +33,7 @@ EOF
 
 # 3. LiveKitSDK class, static version constant
 # -----------------------------------------
-replace ./Sources/LiveKit/LiveKit.swift <<EOF
+replace ./LiveKitClient/Sources/LiveKit/LiveKit.swift <<EOF
 ,s/static let version = "[^"]*"/static let version = "${VERSION}"/g
 w
 q
