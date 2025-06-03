@@ -370,6 +370,12 @@ public class Room: NSObject, ObservableObject, Loggable {
 
         await cleanUp()
     }
+
+    @objc
+    public func wrapDelegateWith(delegate: RoomDelegate) -> RoomDelegate
+    {
+        return RoomDelegateKotlin(delegate: delegate)
+    }
 }
 
 // MARK: - Internal
