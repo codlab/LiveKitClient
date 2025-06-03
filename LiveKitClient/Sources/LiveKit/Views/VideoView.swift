@@ -112,6 +112,12 @@ public class VideoView: NativeView, Loggable {
         }
     }
 
+    @objc
+    public func wrapDelegate() -> VideoTrackAddKotlin
+    {
+        return VideoTrackAddKotlin(videoView: self)
+    }
+
     /// If set to false, rendering will be paused temporarily. Useful for performance optimizations with UICollectionViewCell etc.
     @objc
     public nonisolated var isEnabled: Bool {

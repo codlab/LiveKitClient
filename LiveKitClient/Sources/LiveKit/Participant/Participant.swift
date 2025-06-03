@@ -125,7 +125,6 @@ public class Participant: NSObject, @unchecked Sendable, ObservableObject, Logga
             guard let self, let room = self._room else { return }
 
             if newState.isSpeaking != oldState.isSpeaking {
-                self.delegates.notify(label: { "participant.didUpdate isSpeaking: \(self.isSpeaking)" }) {
                 self.delegates.notify(label: { "participant.didUpdate isSpeaking: \(newState.isSpeaking)" }) {
                     $0.participant?(self, didUpdateIsSpeaking: newState.isSpeaking)
                 }

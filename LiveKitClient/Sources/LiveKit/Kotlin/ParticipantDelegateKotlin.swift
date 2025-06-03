@@ -58,6 +58,21 @@ public class ParticipantDelegateKotlin: ParticipantDelegate {
 
     // MARK: - LocalTrackPublication
 
+    //@objc(localParticipant:trackPublication:)
+    //public func participant(_ participant: LocalParticipant, trackPublication track: TrackPublication, didReceiveTranscriptionSegments segments: [TranscriptionSegment]) {
+    //    self.delegate.participant?(participant, trackPublication: track, didReceiveTranscriptionSegments: segments)
+    //}
+
+    //@objc(remoteParticipant:trackPublication:)
+    //public func participant(_ participant: RemoteParticipant, trackPublication track: TrackPublication, didReceiveTranscriptionSegments segments: [TranscriptionSegment]) {
+    //    self.delegate.participant?(participant, trackPublication: track, didReceiveTranscriptionSegments: segments)
+    //}
+
+    @objc
+    public func participant(_ participant: Participant, trackPublication track: TrackPublication, didReceiveTranscriptionSegments segments: [TranscriptionSegment]) {
+        self.delegate.participant?(participant, trackPublication: track, didReceiveTranscriptionSegments: segments)
+    }
+
     /// The ``LocalParticipant`` has published a ``LocalTrackPublication``.
     @objc(localParticipant:didPublishTrack:)
     public func participant(_ participant: LocalParticipant, didPublishTrack publication: LocalTrackPublication) {

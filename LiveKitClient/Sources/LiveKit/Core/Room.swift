@@ -421,6 +421,12 @@ public class Room: NSObject, @unchecked Sendable, ObservableObject, Loggable {
 
         await cleanUp()
     }
+
+    @objc
+    public func wrapDelegateWith(delegate: RoomDelegate) -> RoomDelegate
+    {
+        return RoomDelegateKotlin(delegate: delegate)
+    }
 }
 
 // MARK: - Internal
